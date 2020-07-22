@@ -18,11 +18,9 @@ const sb = () => {
 }
 
 const sc = () => {
-  if (la.length >= 2 && lb.length >= 2) {
-    [la[0], la[1]] = [la[1], la[0]];
-    [lb[0], lb[1]] = [lb[1], lb[0]];
-    console.log('sc');
-  }
+  sa();
+  sb();
+  console.log('sc');
 }
 
 const pa = () => {
@@ -54,11 +52,9 @@ const rb = () => {
 }
 
 const rr = () => {
-  if (la.length >= 1 && lb.length >= 1) {
-    la.push(la.shift());
-    lb.push(lb.shift());
-    console.log('rr');
-  }
+  ra();
+  rb();
+  console.log('rr');
 }
 
 const rra = () => {
@@ -76,16 +72,30 @@ const rrb = () => {
 }
 
 const rrr = () => {
-  if (la.length >= 1 && lb.length >= 1) {
-    la.unshift(la.pop());
-    lb.unshift(lb.pop());
-    console.log('rrr');
-  }
+  rra();
+  rrb();
+  console.log('rrr');
 }
 
+/**
+ * sa : échange les positions des deux premiers éléments de la
+ * sb : échange les positions des deux premiers éléments de lb
+ * sc : sa et sb en même temps
+ * 
+ * pa : prend le premier élément de lb et le place à la première position de la
+ * pb : prend le premier élément de la et le place à la première position de lb
+ * 
+ * ra : fait une rotation de la vers le début (le premier élément devient le dernier)
+ * rb : fait une rotation de lb vers le début (le premier élément devient le dernier)
+ * rr : ra et rb en même temps
+ * 
+ * rra : fait une rotation de la vers la fin (le dernier élément devient le premier)
+ * rrb : fait une rotation de lb vers la fin (le dernier élément devient le premier)
+ * rra : rra et rrb en même temps
+ */
 const pushswap = () => {
-
+  // WIP...
 }
-pushswap();
+pushswap()
 
 console.table({ la, lb });
