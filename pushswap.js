@@ -24,17 +24,18 @@ const argv = process.argv.slice(2);
  * rra : rra et rrb en même temps
  */
 const pushswap = (la, lb = []) => {
+  let called = '';
   const sa = () => {
     if (la.length >= 2) {
       [la[0], la[1]] = [la[1], la[0]];
-      console.log('sa');
+      return 'sa';
     }
   }
 
   const sb = () => {
     if (lb.length >= 2) {
       [lb[0], lb[1]] = [lb[1], lb[0]];
-      console.log('sb');
+      return 'sb';
     }
   }
 
@@ -42,35 +43,35 @@ const pushswap = (la, lb = []) => {
     if (la.length >= 2 && lb.length >= 2) {
       [la[0], la[1]] = [la[1], la[0]];
       [lb[0], lb[1]] = [lb[1], lb[0]];
-      console.log('sc');
+      return 'sc';
     }
   }
 
   const pa = () => {
     if (lb.length >= 1) {
       la.unshift(lb.shift());
-      console.log('pa');
+      return 'pa';
     }
   }
 
   const pb = () => {
     if (la.length >= 1) {
       lb.unshift(la.shift());
-      console.log('pb');
+      return 'pb';
     }
   }
 
   const ra = () => {
     if (la.length >= 1) {
       la.push(la.shift());
-      console.log('ra');
+      return 'ra';
     }
   }
 
   const rb = () => {
     if (lb.length >= 1) {
       lb.push(lb.shift());
-      console.log('rb');
+      return 'rb';
     }
   }
 
@@ -78,21 +79,21 @@ const pushswap = (la, lb = []) => {
     if (la.length >= 1 && lb.length >= 1) {
       la.push(la.shift());
       lb.push(lb.shift());
-      console.log('rr');
+      return 'rr';
     }
   }
 
   const rra = () => {
     if (la.length >= 1) {
       la.unshift(la.pop());
-      console.log('rra');
+      return 'rra';
     }
   }
 
   const rrb = () => {
     if (lb.length >= 1) {
       lb.unshift(lb.pop());
-      console.log('rrb');
+      return 'rrb';
     }
   }
 
@@ -100,10 +101,31 @@ const pushswap = (la, lb = []) => {
     if (la.length >= 1 && lb.length >= 1) {
       la.unshift(la.pop());
       lb.unshift(lb.pop());
-      console.log('rrr');
+      return 'rrr';
     }
   }
 
-  console.table({ la, lb });
+  let corrected = false;
+  while (corrected === false) {
+    let nbr = Number(...la);
+    let min = Math.min(...la);
+    if (nbr > min) {
+      called += ra() + ' ';
+    } else if (nbr === min) {
+      called += pb() + ' ';
+    }
+    if (!la.length) {
+      corrected = true;
+    }
+  }
+
+  if (corrected === true) {
+    while (lb.length) {
+      pa();
+    }
+  }
+
+  console.log(called)
+  // console.table({ la, lb });
 }
 pushswap(argv);
