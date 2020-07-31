@@ -121,11 +121,11 @@ const pushswap = (la, lb = []) => {
 
   if (corrected === true) {
     while (lb.length) {
-      pa();
+      called += pa() + ' ';
     }
   }
 
   console.log(called)
-  // console.table({ la, lb });
+  console.table({ la, lb });
 }
 pushswap(argv);
